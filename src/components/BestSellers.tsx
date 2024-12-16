@@ -1,27 +1,27 @@
 const products = [
   {
     id: 1,
-    name: "Instant camera",
-    price: 100.00,
-    image: "/lovable-uploads/6370727b-3c2b-4861-8d7b-fdae15503fbb.png"
+    name: "Smart Watch Pro",
+    price: 299.99,
+    image: "/lovable-uploads/smart-watch.png"
   },
   {
     id: 2,
-    name: "Wireless mouse",
-    price: 50.00,
-    image: "/lovable-uploads/6370727b-3c2b-4861-8d7b-fdae15503fbb.png"
+    name: "Noise-Canceling Headphones",
+    price: 249.99,
+    image: "/lovable-uploads/headphones.png"
   },
   {
     id: 3,
-    name: "Fitness tracker",
-    price: 75.00,
-    image: "/lovable-uploads/6370727b-3c2b-4861-8d7b-fdae15503fbb.png"
+    name: "4K Drone Camera",
+    price: 799.99,
+    image: "/lovable-uploads/drone.png"
   },
   {
     id: 4,
-    name: "Wireless earbuds",
-    price: 100.00,
-    image: "/lovable-uploads/6370727b-3c2b-4861-8d7b-fdae15503fbb.png"
+    name: "Gaming Console Elite",
+    price: 499.99,
+    image: "/lovable-uploads/console.png"
   }
 ];
 

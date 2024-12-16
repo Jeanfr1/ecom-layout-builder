@@ -7,21 +7,21 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 space-y-6">
             <h1 className="text-7xl font-mono text-white font-bold leading-tight">
-              SELCORE
+              TECHVERSE
             </h1>
             <p className="text-xl text-white/80">
-              Your Ultimate Destination for the Best Value Electronics and Gadgets
+              Discover Tomorrow's Technology Today - Your Gateway to Innovation
             </p>
             <Button
               className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg"
               asChild
             >
-              <a href="#shop">SHOP NOW</a>
+              <a href="#shop">EXPLORE NOW</a>
             </Button>
           </div>
           <div className="md:w-1/2 mt-10 md:mt-0">
             <img
-              src="/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png"
+              src="/lovable-uploads/hero-product.png"
               alt="Featured Product"
               className="w-full h-auto object-contain"
             />

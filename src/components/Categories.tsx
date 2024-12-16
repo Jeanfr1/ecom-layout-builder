@@ -1,18 +1,18 @@
 const categories = [
   {
-    title: "Computers & Tablets",
-    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png",
-    link: "/computers"
+    title: "Smart Home",
+    image: "/lovable-uploads/smart-home.png",
+    link: "/smart-home"
   },
   {
-    title: "Cell Phones",
-    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png",
-    link: "/phones"
+    title: "Gaming & VR",
+    image: "/lovable-uploads/gaming.png",
+    link: "/gaming"
   },
   {
-    title: "Accessories",
-    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png",
-    link: "/accessories"
+    title: "Wearables",
+    image: "/lovable-uploads/wearables.png",
+    link: "/wearables"
   }
 ];
 
