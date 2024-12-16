@@ -33,7 +33,7 @@ const Categories = () => {
         <Player
           autoplay
           loop
-          src="https://lottie.host/c067c4ea-6a89-47d1-944f-df3b4bb2d89b/rnLOPHFGAz.json"
+          src="https://assets9.lottiefiles.com/packages/lf20_xvrofzfk.json"
           style={{ height: "200px", width: "200px" }}
         />
       </div>
