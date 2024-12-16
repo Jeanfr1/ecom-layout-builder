@@ -17,7 +17,7 @@ const Hero = () => {
           <Player
             autoplay
             loop
-            src="https://lottie.host/58ead7c6-bcc3-47b7-b64f-6b07fdc11b42/zSdNXO9jF1.json"
+            src="https://lottie.host/fe2c5f9b-736f-44c4-9187-c4b4851ffaac/aHF2EGT1Eo.json"
             style={{ height: "100px", width: "100px" }}
           />
         </div>
@@ -25,7 +25,7 @@ const Hero = () => {
           <Player
             autoplay
             loop
-            src="https://lottie.host/2e20a225-3ae3-41bb-9231-33d8b83b9f0f/RqZWwxWNVJ.json"
+            src="https://lottie.host/c067c4ea-6a89-47d1-944f-df3b4bb2d89b/rnLOPHFGAz.json"
             style={{ height: "120px", width: "120px" }}
           />
         </div>
