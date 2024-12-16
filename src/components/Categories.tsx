@@ -1,3 +1,7 @@
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Player } from "@lottiefiles/react-lottie-player";
+
 const categories = [
   {
     title: "Smart Home",
@@ -17,22 +21,51 @@ const categories = [
 ];
 
 const Categories = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+
   return (
-    <div className="bg-[#0F1115] py-20">
+    <div className="bg-[#0F1115] py-20 relative">
+      {/* Decorative Lottie Animation */}
+      <div className="absolute bottom-0 left-0 opacity-30 pointer-events-none">
+        <Player
+          autoplay
+          loop
+          src="https://lottie.host/2e20a225-3ae3-41bb-9231-33d8b83b9f0f/RqZWwxWNVJ.json"
+          style={{ height: "200px", width: "200px" }}
+        />
+      </div>
+
+      {/* Geometric Separator */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden">
+        <svg className="relative block w-full h-[50px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path
+            d="M1200 120L0 16.48V0h1200v120z"
+            className="fill-primary/10"
+          ></path>
+        </svg>
+      </div>
+
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-4xl font-mono text-white animate-fade-in">Shop By Category</h2>
+          <h2 className="text-4xl font-mono text-white">Shop By Category</h2>
           <button className="bg-primary/20 text-primary px-6 py-2 rounded-full hover:bg-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20">
             ALL PRODUCTS
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {categories.map((category, index) => (
-            <a
+            <motion.a
               key={index}
               href={category.link}
-              className="group relative aspect-square overflow-hidden rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/20"
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.03, rotateY: 5 }}
+              className="group relative aspect-square overflow-hidden rounded-2xl shadow-lg shadow-primary/5 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300"
             >
               <img
                 src={category.image}
@@ -43,7 +76,7 @@ const Categories = () => {
               <h3 className="absolute bottom-6 left-6 text-white text-xl font-mono transition-transform duration-300 group-hover:translate-x-2">
                 {category.title}
               </h3>
-            </a>
+            </motion.a>
           ))}
         </div>
       </div>

@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const products = [
   {
@@ -33,6 +36,10 @@ const products = [
 
 const BestSellers = () => {
   const [prices, setPrices] = useState(products.map(p => p.originalPrice));
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,20 +58,39 @@ const BestSellers = () => {
   }, []);
 
   return (
-    <div className="bg-[#0F1115] py-20">
+    <div className="bg-[#0F1115] py-20 relative">
+      {/* Decorative Lottie Animation */}
+      <div className="absolute top-0 right-0 opacity-30 pointer-events-none">
+        <Player
+          autoplay
+          loop
+          src="https://lottie.host/58ead7c6-bcc3-47b7-b64f-6b07fdc11b42/zSdNXO9jF1.json"
+          style={{ height: "200px", width: "200px" }}
+        />
+      </div>
+
+      {/* Geometric Separator */}
+      <div className="absolute top-0 left-0 w-full h-1">
+        <div className="h-full bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      </div>
+
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-4xl font-mono text-white animate-fade-in">Best Sellers</h2>
+          <h2 className="text-4xl font-mono text-white">Best Sellers</h2>
           <button className="bg-primary/20 text-primary px-6 py-2 rounded-full hover:bg-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20">
             VIEW ALL
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product, index) => (
-            <div 
-              key={product.id} 
-              className="bg-secondary/50 backdrop-blur-xl rounded-2xl p-6 space-y-4 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/20"
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.03, rotateY: 5 }}
+              className="bg-secondary/50 backdrop-blur-xl rounded-2xl p-6 space-y-4 shadow-lg shadow-primary/5 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300"
             >
               <div className="aspect-square bg-white/5 rounded-xl p-4 overflow-hidden">
                 <img
@@ -82,7 +108,7 @@ const BestSellers = () => {
                   ${prices[index].toFixed(2)}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
