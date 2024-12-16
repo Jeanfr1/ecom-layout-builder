@@ -1,48 +1,60 @@
-import { ShoppingCart, Heart, User } from "lucide-react";
+import { ShoppingCart, Heart, User, Laptop, Smartphone, Headphones, Gift, Mail, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 w-full bg-secondary/80 backdrop-blur-lg z-50">
+    <nav className="fixed top-0 w-full backdrop-blur-xl bg-secondary/50 border-b border-white/10 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-mono text-white font-bold">
+          <Link 
+            to="/" 
+            className="text-2xl font-mono text-white font-bold hover:text-primary transition-colors"
+          >
             TECHVERSE
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/new" className="text-white hover:text-primary transition-colors">
-              New In
-            </Link>
-            <Link to="/phones" className="text-white hover:text-primary transition-colors">
-              Cell Phones
-            </Link>
-            <Link to="/computers" className="text-white hover:text-primary transition-colors">
-              Computers & Tablets
-            </Link>
-            <Link to="/accessories" className="text-white hover:text-primary transition-colors">
-              Accessories
-            </Link>
-            <Link to="/sale" className="text-white hover:text-primary transition-colors">
-              Sale
-            </Link>
-            <Link to="/contact" className="text-white hover:text-primary transition-colors">
-              Contact
-            </Link>
+            {[
+              { to: "/new", label: "New In", icon: Gift },
+              { to: "/phones", label: "Cell Phones", icon: Smartphone },
+              { to: "/computers", label: "Computers & Tablets", icon: Laptop },
+              { to: "/accessories", label: "Accessories", icon: Headphones },
+              { to: "/contact", label: "Contact", icon: Mail },
+            ].map((item) => (
+              <Link 
+                key={item.to}
+                to={item.to} 
+                className="text-white hover:text-primary transition-all duration-300 flex items-center space-x-2 group"
+              >
+                <item.icon 
+                  className="w-4 h-4 transition-all duration-300 group-hover:scale-110" 
+                />
+                <span>{item.label}</span>
+              </Link>
+            ))}
           </div>
 
-          <div className="flex items-center space-x-4">
-            <button className="text-white hover:text-primary transition-colors">
-              <User size={24} />
-            </button>
-            <button className="text-white hover:text-primary transition-colors">
-              <Heart size={24} />
-            </button>
-            <button className="text-white hover:text-primary transition-colors relative">
-              <ShoppingCart size={24} />
-              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
-              </span>
+          <div className="flex items-center space-x-6">
+            {[
+              { icon: User, label: "Account" },
+              { icon: Heart, label: "Wishlist" },
+              { icon: ShoppingCart, label: "Cart", badge: "0" }
+            ].map((item, index) => (
+              <button 
+                key={index}
+                className="text-white hover:text-primary transition-all duration-300 group relative"
+                aria-label={item.label}
+              >
+                <item.icon className="w-6 h-6 transition-transform group-hover:scale-110" />
+                {item.badge && (
+                  <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+                    {item.badge}
+                  </span>
+                )}
+              </button>
+            ))}
+            <button className="md:hidden text-white hover:text-primary transition-colors">
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>
