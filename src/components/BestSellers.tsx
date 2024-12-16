@@ -91,7 +91,7 @@ const BestSellers = () => {
         <Player
           autoplay
           loop
-          src="https://assets9.lottiefiles.com/packages/lf20_rqc9mnar.json"
+          src="https://assets2.lottiefiles.com/packages/lf20_uwR49r.json"
           style={{ height: "200px", width: "200px" }}
         />
       </div>
