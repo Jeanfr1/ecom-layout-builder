@@ -3,24 +3,30 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Player } from "@lottiefiles/react-lottie-player";
 
-const TypewriterText = ({ text }: { text: string }) => {
+const TypewriterText = ({ text, inView }: { text: string; inView: boolean }) => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (currentIndex < text.length) {
+    if (inView && currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setDisplayText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
       }, 100);
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex, text]);
+    if (!inView) {
+      setDisplayText("");
+      setCurrentIndex(0);
+    }
+  }, [currentIndex, text, inView]);
 
   return (
     <span className="inline-block">
       {displayText}
-      <span className="animate-pulse">|</span>
+      {inView && currentIndex < text.length && (
+        <span className="animate-pulse">|</span>
+      )}
     </span>
   );
 };
@@ -59,7 +65,7 @@ const products = [
 const BestSellers = () => {
   const [prices, setPrices] = useState(products.map(p => p.originalPrice));
   const { ref, inView } = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1
   });
 
@@ -95,17 +101,27 @@ const BestSellers = () => {
       </div>
 
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="text-4xl font-mono text-white relative group">
-            <TypewriterText text="Best Sellers" />
+        <div ref={ref} className="flex justify-between items-center mb-12">
+          <motion.h2 
+            className="text-4xl font-mono text-white relative group"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5 }}
+          >
+            <TypewriterText text="Best Sellers" inView={inView} />
             <div className="absolute inset-0 blur-lg bg-primary/30 -z-10 group-hover:bg-primary/50 transition-colors duration-300"></div>
-          </h2>
-          <button className="bg-primary/20 text-primary px-6 py-2 rounded-full hover:bg-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20">
+          </motion.h2>
+          <motion.button 
+            className="bg-primary/20 text-primary px-6 py-2 rounded-full hover:bg-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20"
+            initial={{ opacity: 0, x: 20 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             VIEW ALL
-          </button>
+          </motion.button>
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product, index) => (
             <motion.div
               key={product.id}

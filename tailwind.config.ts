@@ -91,6 +91,16 @@ export default {
             opacity: "1",
             transform: "translateX(0)"
           }
+        },
+        "gradient-x": {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center"
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center"
+          }
         }
       },
       animation: {
@@ -98,6 +108,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.5s ease-out",
         "slide-in": "slide-in 0.5s ease-out",
+        "gradient-x": "gradient-x 15s ease infinite",
       },
     },
   },
