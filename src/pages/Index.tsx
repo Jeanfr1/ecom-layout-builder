@@ -5,6 +5,7 @@ import BestSellers from "@/components/BestSellers";
 import WhyUs from "@/components/WhyUs";
 import Categories from "@/components/Categories";
 import Newsletter from "@/components/Newsletter";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <div className="container mx-auto px-4 py-20">
         <Newsletter />
       </div>
+      <Footer />
     </div>
   );
 };
