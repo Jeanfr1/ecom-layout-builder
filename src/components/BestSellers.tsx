@@ -3,25 +3,25 @@ const products = [
     id: 1,
     name: "Smart Watch Pro",
     price: 299.99,
-    image: "/lovable-uploads/smart-watch.png"
+    image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9"
   },
   {
     id: 2,
     name: "Noise-Canceling Headphones",
     price: 249.99,
-    image: "/lovable-uploads/headphones.png"
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
   },
   {
     id: 3,
     name: "4K Drone Camera",
     price: 799.99,
-    image: "/lovable-uploads/drone.png"
+    image: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc"
   },
   {
     id: 4,
     name: "Gaming Console Elite",
     price: 499.99,
-    image: "/lovable-uploads/console.png"
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
   }
 ];
 

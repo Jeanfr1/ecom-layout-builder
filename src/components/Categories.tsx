@@ -1,17 +1,17 @@
 const categories = [
   {
     title: "Smart Home",
-    image: "/lovable-uploads/smart-home.png",
+    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
     link: "/smart-home"
   },
   {
     title: "Gaming & VR",
-    image: "/lovable-uploads/gaming.png",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
     link: "/gaming"
   },
   {
     title: "Wearables",
-    image: "/lovable-uploads/wearables.png",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
     link: "/wearables"
   }
 ];

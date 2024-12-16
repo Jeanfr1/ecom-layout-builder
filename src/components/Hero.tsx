@@ -21,7 +21,7 @@ const Hero = () => {
           </div>
           <div className="md:w-1/2 mt-10 md:mt-0">
             <img
-              src="/lovable-uploads/hero-product.png"
+              src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
               alt="Featured Product"
               className="w-full h-auto object-contain"
             />
