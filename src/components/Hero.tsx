@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   const { ref, inView } = useInView({
@@ -33,34 +34,56 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-20">
         <div className="flex flex-col md:flex-row items-center justify-between">
           {/* Glass Card */}
-          <div 
+          <motion.div 
             ref={ref}
-            className={`md:w-1/2 space-y-6 backdrop-blur-xl bg-white/5 p-8 rounded-2xl border border-white/10 shadow-xl transition-all duration-700 ${
-              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="md:w-1/2 space-y-6 backdrop-blur-xl bg-white/5 p-8 rounded-2xl border border-white/10 shadow-xl"
           >
-            <h1 className="text-7xl font-mono text-white font-bold leading-tight">
-              TECHVERSE
-            </h1>
-            <p className="text-xl text-white/80">
-              Discover Tomorrow's Technology Today - Your Gateway to Innovation
-            </p>
-            <Button
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 group"
-              asChild
+            <motion.h1 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-7xl font-poppins font-bold leading-tight text-gradient title-shadow"
             >
-              <a href="#shop" className="group-hover:translate-x-1 transition-transform">
-                EXPLORE NOW
-              </a>
-            </Button>
-          </div>
-          <div className="md:w-1/2 mt-10 md:mt-0">
+              TECHVERSE
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-xl font-inter text-white/80 tracking-wide"
+            >
+              Discover Tomorrow's Technology Today - Your Gateway to Innovation
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+            >
+              <Button
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 group font-medium"
+                asChild
+              >
+                <a href="#shop" className="group-hover:translate-x-1 transition-transform">
+                  EXPLORE NOW
+                </a>
+              </Button>
+            </motion.div>
+          </motion.div>
+          <motion.div 
+            className="md:w-1/2 mt-10 md:mt-0"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
             <img
               src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
               alt="Featured Product"
-              className="w-full h-auto object-contain transition-all duration-500 hover:scale-105 animate-fade-in rounded-2xl shadow-2xl"
+              className="w-full h-auto object-contain rounded-2xl shadow-2xl"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
 
