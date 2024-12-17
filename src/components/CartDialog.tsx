@@ -133,20 +133,23 @@ const CartDialog = () => {
         <button className="text-white hover:text-primary transition-all duration-300 group relative">
           <ShoppingCart className="w-6 h-6 transition-transform group-hover:scale-110" />
           {cartItems && cartItems.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+            <span className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
               {cartItems.length}
             </span>
           )}
         </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[600px] bg-secondary/95 backdrop-blur-xl border border-white/10">
         <DialogHeader>
-          <DialogTitle>Shopping Cart</DialogTitle>
+          <DialogTitle className="text-2xl font-playfair text-gradient">Shopping Cart</DialogTitle>
         </DialogHeader>
         {!session ? (
-          <div className="text-center py-8">
+          <div className="text-center py-8 glass-effect rounded-lg p-6">
             <p className="text-muted-foreground mb-4">Please sign in to view your cart</p>
-            <Button onClick={() => document.getElementById("account-trigger")?.click()}>
+            <Button 
+              onClick={() => document.getElementById("account-trigger")?.click()}
+              className="bg-primary hover:bg-primary/80 text-white"
+            >
               Sign In
             </Button>
           </div>
@@ -156,27 +159,29 @@ const CartDialog = () => {
             isLoading={checkoutMutation.isPending}
           />
         ) : (
-          <>
+          <div className="space-y-6">
             <CartItemsList 
               items={cartItems || []}
               onQuantityChange={handleQuantityChange}
               onDelete={(id) => deleteItemMutation.mutate(id)}
             />
             {cartItems && cartItems.length > 0 && (
-              <div className="mt-4 space-y-4">
-                <div className="flex justify-between">
-                  <span className="font-medium">Total Items:</span>
-                  <span>{cartItems.reduce((acc, item) => acc + item.quantity, 0)}</span>
+              <div className="mt-6 space-y-4 glass-effect rounded-lg p-6">
+                <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                  <span className="text-lg font-medium text-white">Total Items</span>
+                  <span className="text-xl font-bold text-primary">
+                    {cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+                  </span>
                 </div>
                 <Button 
-                  className="w-full"
+                  className="w-full bg-primary hover:bg-primary/80 text-white font-semibold py-6"
                   onClick={() => setShowShippingForm(true)}
                 >
                   Proceed to Checkout
                 </Button>
               </div>
             )}
-          </>
+          </div>
         )}
       </DialogContent>
     </Dialog>
