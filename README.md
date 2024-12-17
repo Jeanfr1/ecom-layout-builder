@@ -1,69 +1,103 @@
-# Welcome to your Lovable project
+<div align="center">
+  <img src="public/lovable-uploads/3c3ba383-7252-44e8-ba28-cf9bc9c1cadb.png" alt="Techverse Banner" width="100%" style="border-radius: 8px;" />
 
-## Project info
+  # TECHVERSE
+  
+  ### 🚀 Your Gateway to Tomorrow's Technology
 
-**URL**: https://lovable.dev/projects/a5b75985-e958-4315-a55a-0c58856c17a8
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-NETLIFY-ID/deploy-status)](https://app.netlify.com/#)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
+  ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+  ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
+</div>
 
-## How can I edit this code?
+## 🌟 Overview
 
-There are several ways of editing your application.
+TECHVERSE is a cutting-edge e-commerce platform specializing in the latest technology products. From smartphones to laptops, and smart home devices to essential accessories, we bring the future of technology to your fingertips.
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a5b75985-e958-4315-a55a-0c58856c17a8) and start prompting.
+- 🔐 **Secure Authentication** - Protected routes and user management
+- 🛍️ **Smart Shopping** - Intuitive product categorization and search
+- 🛒 **Seamless Cart Management** - Real-time updates and easy checkout
+- 💳 **Secure Payments** - Protected transaction processing
+- 📱 **Responsive Design** - Perfect experience across all devices
+- 🎨 **Modern UI/UX** - Built with Tailwind CSS and shadcn/ui
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🚀 Tech Stack
 
-**Use your preferred IDE**
+- **Frontend Framework:** React with TypeScript
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS + shadcn/ui
+- **Backend Services:** Supabase
+- **State Management:** TanStack Query
+- **Deployment:** Netlify
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. **Clone the repository**
+```bash
+git clone <your-repo-url>
+cd techverse
+```
 
-Follow these steps:
+2. **Install dependencies**
+```bash
+npm install
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. **Set up environment variables**
+Create a `.env` file in the root directory:
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+4. **Start the development server**
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+5. **Build for production**
+```bash
+npm run build
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📱 Product Categories
 
-**Use GitHub Codespaces**
+- 📱 **Phones** - Latest smartphones and mobile devices
+- 💻 **Computers & Tablets** - Powerful computing solutions
+- 🎧 **Accessories** - Essential add-ons and peripherals
+- 🏠 **Smart Home** - Connected living solutions
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🌐 Deployment
 
-## What technologies are used for this project?
+This project is configured for seamless deployment on Netlify. The `netlify.toml` file includes all necessary build configurations and redirects for optimal performance.
 
-This project is built with .
+## 🤝 Contributing
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## How can I deploy this project?
+## 📄 License
 
-Simply open [Lovable](https://lovable.dev/projects/a5b75985-e958-4315-a55a-0c58856c17a8) and click on Share -> Publish.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## I want to use a custom domain - is that possible?
+## 🙏 Acknowledgments
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Supabase](https://supabase.com/)
+- [Netlify](https://www.netlify.com/)
+
+---
+
+<div align="center">
+  Made with ❤️ by the TECHVERSE team
+</div>
