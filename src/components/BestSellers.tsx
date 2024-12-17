@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { useNavigate } from "react-router-dom";
 
 const TypewriterText = ({ text, inView }: { text: string; inView: boolean }) => {
   const [displayText, setDisplayText] = useState("");
@@ -37,32 +38,37 @@ const products = [
     name: "Apple Watch Ultra",
     price: 799.99,
     originalPrice: 899.99,
-    image: "/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png"
+    image: "/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png",
+    category: "accessories"
   },
   {
     id: 2,
     name: "AirPods Pro",
     price: 249.99,
     originalPrice: 329.99,
-    image: "/lovable-uploads/6370727b-3c2b-4861-8d7b-fdae15503fbb.png"
+    image: "/lovable-uploads/6370727b-3c2b-4861-8d7b-fdae15503fbb.png",
+    category: "accessories"
   },
   {
     id: 3,
     name: "Pro Gaming Setup",
     price: 2499.99,
     originalPrice: 2999.99,
-    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png"
+    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png",
+    category: "computers"
   },
   {
     id: 4,
     name: "DualSense Controller",
     price: 69.99,
     originalPrice: 89.99,
-    image: "/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png"
+    image: "/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png",
+    category: "accessories"
   }
 ];
 
 const BestSellers = () => {
+  const navigate = useNavigate();
   const [prices, setPrices] = useState(products.map(p => p.originalPrice));
   const { ref, inView } = useInView({
     triggerOnce: false,
@@ -84,6 +90,14 @@ const BestSellers = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleViewAll = () => {
+    navigate("/new");
+  };
+
+  const handleProductClick = (category: string) => {
+    navigate(`/${category}`);
+  };
 
   return (
     <div className="bg-[#0F1115] py-20 relative">
@@ -116,6 +130,7 @@ const BestSellers = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            onClick={handleViewAll}
           >
             VIEW ALL
           </motion.button>
@@ -129,7 +144,8 @@ const BestSellers = () => {
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ scale: 1.03, rotateY: 5 }}
-              className="bg-secondary/50 backdrop-blur-xl rounded-2xl p-6 space-y-4 shadow-lg shadow-primary/5 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300"
+              className="bg-secondary/50 backdrop-blur-xl rounded-2xl p-6 space-y-4 shadow-lg shadow-primary/5 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 cursor-pointer"
+              onClick={() => handleProductClick(product.category)}
             >
               <div className="aspect-square bg-white/5 rounded-xl p-4 overflow-hidden">
                 <img

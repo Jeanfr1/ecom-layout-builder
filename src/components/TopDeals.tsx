@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TypewriterText = ({ text }: { text: string }) => {
   const [displayText, setDisplayText] = useState("");
@@ -24,6 +25,8 @@ const TypewriterText = ({ text }: { text: string }) => {
 };
 
 const TopDeals = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-[#0F1115] py-20">
       <div className="container mx-auto px-4">
@@ -36,13 +39,13 @@ const TopDeals = () => {
             <div className="space-y-2">
               <p className="text-white/60">UP TO</p>
               <p className="text-6xl font-bold text-white animate-pulse">30% OFF</p>
-              <p className="text-white/60">SELECTED BRANDS</p>
+              <p className="text-white/60">ON LATEST PHONES</p>
             </div>
             <Button
               className="bg-white text-secondary hover:bg-white/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-              asChild
+              onClick={() => navigate("/phones")}
             >
-              <a href="#deals">SHOP NOW</a>
+              SHOP NOW
             </Button>
           </div>
 
@@ -51,12 +54,12 @@ const TopDeals = () => {
               <TypewriterText text="Our Staff Pick" />
               <div className="absolute inset-0 blur-lg bg-primary/30 -z-10 group-hover:bg-primary/50 transition-colors duration-300"></div>
             </h2>
-            <p className="text-xl text-white/80">Tune into quality sound</p>
+            <p className="text-xl text-white/80">Premium Gaming Accessories</p>
             <Button
               className="bg-white text-secondary hover:bg-white/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-              asChild
+              onClick={() => navigate("/accessories")}
             >
-              <a href="#staff-pick">SHOP NOW</a>
+              SHOP NOW
             </Button>
           </div>
         </div>
