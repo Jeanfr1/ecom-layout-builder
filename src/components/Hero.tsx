@@ -2,12 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const navigate = useNavigate();
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-secondary to-[#0F1115] pt-20">
@@ -64,10 +67,10 @@ const Hero = () => {
               className="relative group"
             >
               <Button
+                onClick={() => navigate("/new")}
                 className="px-8 py-6 text-lg relative overflow-hidden bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_100%] hover:bg-[100%_0] transition-all duration-500 hover:shadow-lg hover:shadow-primary/50 group-hover:animate-shimmer"
-                asChild
               >
-                <a href="#shop" className="relative z-10 group-hover:text-white transition-colors flex items-center space-x-2">
+                <span className="relative z-10 group-hover:text-white transition-colors flex items-center space-x-2">
                   <span>EXPLORE NOW</span>
                   <motion.span
                     animate={{ x: [0, 5, 0] }}
@@ -75,7 +78,7 @@ const Hero = () => {
                   >
                     →
                   </motion.span>
-                </a>
+                </span>
               </Button>
               <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/50 to-purple-500/50 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             </motion.div>
