@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Pinterest, ExternalLink, Copyright } from "lucide-react";
+import { Facebook, Instagram, Youtube, ExternalLink, Copyright } from "lucide-react";
 import { Separator } from "./ui/separator";
 
 const Footer = () => {
@@ -61,7 +61,7 @@ const Footer = () => {
             {[
               { icon: Facebook, href: "#", label: "Facebook" },
               { icon: Instagram, href: "#", label: "Instagram" },
-              { icon: Pinterest, href: "#", label: "Pinterest" }
+              { icon: Youtube, href: "#", label: "Youtube" }
             ].map(({ icon: Icon, href, label }, index) => (
               <a
                 key={index}
