@@ -11,7 +11,7 @@ const Accessories = () => {
       id: 1,
       name: "AirPods Pro",
       price: 249.99,
-      image: "https://images.unsplash.com/photo-1588156979435-379b9d802b0a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+      image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
       description: "Active noise cancellation, Adaptive Audio"
     },
     {
