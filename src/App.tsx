@@ -3,11 +3,15 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { createClient } from "@supabase/supabase-js";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState, useEffect } from "react";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
+import NewIn from "./pages/NewIn";
+import Phones from "./pages/Phones";
+import Computers from "./pages/Computers";
+import Accessories from "./pages/Accessories";
+import Contact from "./pages/Contact";
 import { supabase } from "@/integrations/supabase/client";
 
 const queryClient = new QueryClient();
@@ -46,6 +50,31 @@ const App = () => (
             <Route path="/" element={
               <ProtectedRoute>
                 <Index />
+              </ProtectedRoute>
+            } />
+            <Route path="/new" element={
+              <ProtectedRoute>
+                <NewIn />
+              </ProtectedRoute>
+            } />
+            <Route path="/phones" element={
+              <ProtectedRoute>
+                <Phones />
+              </ProtectedRoute>
+            } />
+            <Route path="/computers" element={
+              <ProtectedRoute>
+                <Computers />
+              </ProtectedRoute>
+            } />
+            <Route path="/accessories" element={
+              <ProtectedRoute>
+                <Accessories />
+              </ProtectedRoute>
+            } />
+            <Route path="/contact" element={
+              <ProtectedRoute>
+                <Contact />
               </ProtectedRoute>
             } />
           </Routes>

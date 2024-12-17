@@ -50,14 +50,15 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-6">
             {[
-              { icon: User, label: "Account" },
-              { icon: Heart, label: "Wishlist" },
-              { icon: ShoppingCart, label: "Cart", badge: "0" }
+              { icon: User, label: "Account", onClick: () => toast.info("Account feature coming soon!") },
+              { icon: Heart, label: "Wishlist", onClick: () => toast.info("Wishlist feature coming soon!") },
+              { icon: ShoppingCart, label: "Cart", badge: "0", onClick: () => toast.info("Cart feature coming soon!") }
             ].map((item, index) => (
               <button 
                 key={index}
                 className="text-white hover:text-primary transition-all duration-300 group relative"
                 aria-label={item.label}
+                onClick={item.onClick}
               >
                 <item.icon className="w-6 h-6 transition-transform group-hover:scale-110" />
                 {item.badge && (
