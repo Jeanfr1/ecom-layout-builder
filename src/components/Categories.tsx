@@ -5,7 +5,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 const categories = [
   {
     title: "Smart Home",
-    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png",
+    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80",
     link: "/smart-home",
     description: "Transform your living space"
   },
