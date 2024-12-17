@@ -1,7 +1,9 @@
-import { ShoppingCart, Heart, User, Laptop, Smartphone, Headphones, Gift, Mail, Menu, LogOut } from "lucide-react";
+import { Heart, Laptop, Smartphone, Headphones, Gift, Mail, Menu, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import AccountDialog from "./AccountDialog";
+import CartDialog from "./CartDialog";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -49,25 +51,14 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center space-x-6">
-            {[
-              { icon: User, label: "Account", onClick: () => toast.info("Account feature coming soon!") },
-              { icon: Heart, label: "Wishlist", onClick: () => toast.info("Wishlist feature coming soon!") },
-              { icon: ShoppingCart, label: "Cart", badge: "0", onClick: () => toast.info("Cart feature coming soon!") }
-            ].map((item, index) => (
-              <button 
-                key={index}
-                className="text-white hover:text-primary transition-all duration-300 group relative"
-                aria-label={item.label}
-                onClick={item.onClick}
-              >
-                <item.icon className="w-6 h-6 transition-transform group-hover:scale-110" />
-                {item.badge && (
-                  <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            ))}
+            <AccountDialog />
+            <button 
+              className="text-white hover:text-primary transition-all duration-300 group"
+              onClick={() => toast.info("Wishlist feature coming soon!")}
+            >
+              <Heart className="w-6 h-6 transition-transform group-hover:scale-110" />
+            </button>
+            <CartDialog />
             <button 
               onClick={handleLogout}
               className="text-white hover:text-primary transition-all duration-300 group"
