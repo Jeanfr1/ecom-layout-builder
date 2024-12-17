@@ -1,7 +1,21 @@
-import { ShoppingCart, Heart, User, Laptop, Smartphone, Headphones, Gift, Mail, Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ShoppingCart, Heart, User, Laptop, Smartphone, Headphones, Gift, Mail, Menu, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast.success("Logged out successfully");
+      navigate("/auth");
+    } catch (error) {
+      toast.error("Error logging out");
+    }
+  };
+
   return (
     <nav className="fixed top-0 w-full backdrop-blur-xl bg-secondary/50 border-b border-white/10 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -53,6 +67,13 @@ const Navbar = () => {
                 )}
               </button>
             ))}
+            <button 
+              onClick={handleLogout}
+              className="text-white hover:text-primary transition-all duration-300 group"
+              aria-label="Logout"
+            >
+              <LogOut className="w-6 h-6 transition-transform group-hover:scale-110" />
+            </button>
             <button className="md:hidden text-white hover:text-primary transition-colors">
               <Menu className="w-6 h-6" />
             </button>
