@@ -61,9 +61,9 @@ const Categories = () => {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-mono text-white relative group inline-block">
             <TypewriterText text="Shop by Category" />
-            <div className="absolute inset-0 blur-2xl bg-primary/40 -z-10 group-hover:bg-primary/60 transition-colors duration-300"></div>
-            <div className="absolute -inset-1 -z-20 blur-3xl bg-[#9b87f5]/30 animate-pulse"></div>
-            <div className="absolute -inset-2 -z-30 blur-3xl bg-[#7E69AB]/20 animate-pulse delay-75"></div>
+            <div className="absolute -inset-4 blur-3xl bg-primary/60 -z-10 group-hover:bg-primary/80 transition-colors duration-300"></div>
+            <div className="absolute -inset-8 -z-20 blur-[100px] bg-[#9b87f5]/50 animate-pulse"></div>
+            <div className="absolute -inset-12 -z-30 blur-[120px] bg-[#7E69AB]/40 animate-pulse delay-75"></div>
           </h2>
           <p className="text-gray-400 mt-4">Discover our wide range of tech products</p>
         </div>
