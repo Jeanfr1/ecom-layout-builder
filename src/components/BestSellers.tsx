@@ -34,31 +34,31 @@ const TypewriterText = ({ text, inView }: { text: string; inView: boolean }) => 
 const products = [
   {
     id: 1,
-    name: "Smart Watch Pro",
-    price: 299.99,
-    originalPrice: 399.99,
-    image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9"
+    name: "Apple Watch Ultra",
+    price: 799.99,
+    originalPrice: 899.99,
+    image: "/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png"
   },
   {
     id: 2,
-    name: "Noise-Canceling Headphones",
+    name: "AirPods Pro",
     price: 249.99,
     originalPrice: 329.99,
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+    image: "/lovable-uploads/6370727b-3c2b-4861-8d7b-fdae15503fbb.png"
   },
   {
     id: 3,
-    name: "4K Drone Camera",
-    price: 799.99,
-    originalPrice: 999.99,
-    image: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc"
+    name: "Pro Gaming Setup",
+    price: 2499.99,
+    originalPrice: 2999.99,
+    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png"
   },
   {
     id: 4,
-    name: "Gaming Console Elite",
-    price: 499.99,
-    originalPrice: 599.99,
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+    name: "DualSense Controller",
+    price: 69.99,
+    originalPrice: 89.99,
+    image: "/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png"
   }
 ];
 

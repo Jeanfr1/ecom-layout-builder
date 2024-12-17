@@ -5,21 +5,21 @@ import { Player } from "@lottiefiles/react-lottie-player";
 const categories = [
   {
     title: "Smart Home",
-    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png",
     link: "/smart-home",
     description: "Transform your living space"
   },
   {
-    title: "Gaming & VR",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-    link: "/gaming",
-    description: "Next-level entertainment"
+    title: "Drones & Cameras",
+    image: "/lovable-uploads/fd27b5a2-2a84-4ddd-9cbb-debf33e662ab.png",
+    link: "/drones",
+    description: "Capture amazing moments"
   },
   {
-    title: "Wearables",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-    link: "/wearables",
-    description: "Stay connected in style"
+    title: "VR & Gaming",
+    image: "/lovable-uploads/40de88f7-ad5b-4706-a1e6-c551d874378b.png",
+    link: "/gaming",
+    description: "Next-level entertainment"
   }
 ];
 
