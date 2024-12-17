@@ -1,15 +1,18 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Minus, Plus, Trash2 } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import CartItemsList from "./cart/CartItemsList";
+import ShippingAddressForm from "./cart/ShippingAddressForm";
+import { useState } from "react";
 
 const CartDialog = () => {
   const session = useSession();
   const queryClient = useQueryClient();
+  const [showShippingForm, setShowShippingForm] = useState(false);
 
   const { data: cartItems } = useQuery({
     queryKey: ["cart"],
@@ -61,21 +64,19 @@ const CartDialog = () => {
   });
 
   const checkoutMutation = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (shippingAddress: string) => {
       if (!session?.user?.id || !cartItems || cartItems.length === 0) {
         throw new Error("No items in cart");
       }
 
-      // Calculate total amount
-      const totalAmount = cartItems.reduce((acc, item) => acc + (item.quantity * 99.99), 0); // Using a fixed price for demo
+      const totalAmount = cartItems.reduce((acc, item) => acc + (item.quantity * 99.99), 0);
 
-      // Create order
       const { data: order, error: orderError } = await supabase
         .from("orders")
         .insert({
           user_id: session.user.id,
           total_amount: totalAmount,
-          shipping_address: "123 Demo Street", // In a real app, you'd collect this from the user
+          shipping_address: shippingAddress,
           status: "pending"
         })
         .select()
@@ -83,12 +84,11 @@ const CartDialog = () => {
 
       if (orderError) throw orderError;
 
-      // Create order items
       const orderItems = cartItems.map(item => ({
         order_id: order.id,
         product_id: item.product_id,
         quantity: item.quantity,
-        price_at_time: 99.99 // In a real app, you'd use actual product prices
+        price_at_time: 99.99
       }));
 
       const { error: itemsError } = await supabase
@@ -97,7 +97,6 @@ const CartDialog = () => {
 
       if (itemsError) throw itemsError;
 
-      // Clear cart
       const { error: clearCartError } = await supabase
         .from("user_cart")
         .delete()
@@ -109,6 +108,7 @@ const CartDialog = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
+      setShowShippingForm(false);
       toast.success("Order placed successfully!");
     },
     onError: (error) => {
@@ -123,8 +123,8 @@ const CartDialog = () => {
     updateQuantityMutation.mutate({ id, quantity: newQuantity });
   };
 
-  const handleCheckout = () => {
-    checkoutMutation.mutate();
+  const handleCheckout = (shippingAddress: string) => {
+    checkoutMutation.mutate(shippingAddress);
   };
 
   return (
@@ -150,48 +150,18 @@ const CartDialog = () => {
               Sign In
             </Button>
           </div>
+        ) : showShippingForm ? (
+          <ShippingAddressForm 
+            onSubmit={handleCheckout}
+            isLoading={checkoutMutation.isPending}
+          />
         ) : (
           <>
-            <ScrollArea className="h-[400px] w-full rounded-md border p-4">
-              {!cartItems || cartItems.length === 0 ? (
-                <p className="text-center text-muted-foreground">Your cart is empty</p>
-              ) : (
-                <div className="space-y-4">
-                  {cartItems.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between space-x-4 border-b pb-4">
-                      <div className="flex-1">
-                        <h4 className="font-medium">Product {item.product_id}</h4>
-                        <p className="text-sm text-muted-foreground">Quantity: {item.quantity}</p>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          onClick={() => handleQuantityChange(item.id, item.quantity, -1)}
-                        >
-                          <Minus className="h-4 w-4" />
-                        </Button>
-                        <span className="w-8 text-center">{item.quantity}</span>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          onClick={() => handleQuantityChange(item.id, item.quantity, 1)}
-                        >
-                          <Plus className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="destructive"
-                          size="icon"
-                          onClick={() => deleteItemMutation.mutate(item.id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </ScrollArea>
+            <CartItemsList 
+              items={cartItems || []}
+              onQuantityChange={handleQuantityChange}
+              onDelete={(id) => deleteItemMutation.mutate(id)}
+            />
             {cartItems && cartItems.length > 0 && (
               <div className="mt-4 space-y-4">
                 <div className="flex justify-between">
@@ -199,11 +169,10 @@ const CartDialog = () => {
                   <span>{cartItems.reduce((acc, item) => acc + item.quantity, 0)}</span>
                 </div>
                 <Button 
-                  className="w-full" 
-                  onClick={handleCheckout}
-                  disabled={checkoutMutation.isPending}
+                  className="w-full"
+                  onClick={() => setShowShippingForm(true)}
                 >
-                  {checkoutMutation.isPending ? "Processing..." : "Proceed to Checkout"}
+                  Proceed to Checkout
                 </Button>
               </div>
             )}
