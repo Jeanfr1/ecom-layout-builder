@@ -38,7 +38,7 @@ const products = [
     name: "Apple Watch Ultra",
     price: 799.99,
     originalPrice: 899.99,
-    image: "/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png",
+    image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     category: "accessories"
   },
   {
@@ -46,7 +46,7 @@ const products = [
     name: "AirPods Pro",
     price: 249.99,
     originalPrice: 329.99,
-    image: "/lovable-uploads/6370727b-3c2b-4861-8d7b-fdae15503fbb.png",
+    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     category: "accessories"
   },
   {
@@ -54,7 +54,7 @@ const products = [
     name: "Pro Gaming Setup",
     price: 2499.99,
     originalPrice: 2999.99,
-    image: "/lovable-uploads/ebc7c69d-5c39-40d6-82f5-82ebbbb1bc60.png",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     category: "computers"
   },
   {
@@ -62,7 +62,7 @@ const products = [
     name: "DualSense Controller",
     price: 69.99,
     originalPrice: 89.99,
-    image: "/lovable-uploads/92437fef-9311-4781-919c-eebd216e3649.png",
+    image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     category: "accessories"
   }
 ];
