@@ -1,6 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+
+const TypewriterText = ({ text }: { text: string }) => {
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text]);
+
+  return (
+    <span className="inline-block">
+      {displayText}
+      <span className="animate-pulse">|</span>
+    </span>
+  );
+};
 
 const categories = [
   {
@@ -36,8 +59,12 @@ const Categories = () => {
     <div className="bg-[#0F1115] py-20" id="shop">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">Shop by Category</h2>
-          <p className="text-gray-400">Discover our wide range of tech products</p>
+          <h2 className="text-4xl font-mono text-white relative group inline-block">
+            <TypewriterText text="Shop by Category" />
+            <div className="absolute inset-0 blur-lg bg-primary/30 -z-10 group-hover:bg-primary/50 transition-colors duration-300"></div>
+            <div className="absolute inset-0 -z-20 blur-xl bg-[#9b87f5]/20 animate-pulse"></div>
+          </h2>
+          <p className="text-gray-400 mt-4">Discover our wide range of tech products</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
