@@ -61,15 +61,23 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
+              className="relative group"
             >
               <Button
-                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20 group font-medium"
+                className="px-8 py-6 text-lg relative overflow-hidden bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_100%] hover:bg-[100%_0] transition-all duration-500 hover:shadow-lg hover:shadow-primary/50 group-hover:animate-shimmer"
                 asChild
               >
-                <a href="#shop" className="group-hover:translate-x-1 transition-transform">
-                  EXPLORE NOW
+                <a href="#shop" className="relative z-10 group-hover:text-white transition-colors flex items-center space-x-2">
+                  <span>EXPLORE NOW</span>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                  >
+                    →
+                  </motion.span>
                 </a>
               </Button>
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/50 to-purple-500/50 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             </motion.div>
           </motion.div>
           <motion.div 
