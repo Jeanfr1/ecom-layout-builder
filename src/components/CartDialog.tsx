@@ -60,10 +60,71 @@ const CartDialog = () => {
     },
   });
 
+  const checkoutMutation = useMutation({
+    mutationFn: async () => {
+      if (!session?.user?.id || !cartItems || cartItems.length === 0) {
+        throw new Error("No items in cart");
+      }
+
+      // Calculate total amount
+      const totalAmount = cartItems.reduce((acc, item) => acc + (item.quantity * 99.99), 0); // Using a fixed price for demo
+
+      // Create order
+      const { data: order, error: orderError } = await supabase
+        .from("orders")
+        .insert({
+          user_id: session.user.id,
+          total_amount: totalAmount,
+          shipping_address: "123 Demo Street", // In a real app, you'd collect this from the user
+          status: "pending"
+        })
+        .select()
+        .single();
+
+      if (orderError) throw orderError;
+
+      // Create order items
+      const orderItems = cartItems.map(item => ({
+        order_id: order.id,
+        product_id: item.product_id,
+        quantity: item.quantity,
+        price_at_time: 99.99 // In a real app, you'd use actual product prices
+      }));
+
+      const { error: itemsError } = await supabase
+        .from("order_items")
+        .insert(orderItems);
+
+      if (itemsError) throw itemsError;
+
+      // Clear cart
+      const { error: clearCartError } = await supabase
+        .from("user_cart")
+        .delete()
+        .eq("user_id", session.user.id);
+
+      if (clearCartError) throw clearCartError;
+
+      return order;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+      toast.success("Order placed successfully!");
+    },
+    onError: (error) => {
+      console.error("Checkout error:", error);
+      toast.error("Failed to place order. Please try again.");
+    }
+  });
+
   const handleQuantityChange = (id: string, currentQuantity: number, change: number) => {
     const newQuantity = currentQuantity + change;
     if (newQuantity < 1) return;
     updateQuantityMutation.mutate({ id, quantity: newQuantity });
+  };
+
+  const handleCheckout = () => {
+    checkoutMutation.mutate();
   };
 
   return (
@@ -137,8 +198,12 @@ const CartDialog = () => {
                   <span className="font-medium">Total Items:</span>
                   <span>{cartItems.reduce((acc, item) => acc + item.quantity, 0)}</span>
                 </div>
-                <Button className="w-full" onClick={() => toast.info("Checkout feature coming soon!")}>
-                  Proceed to Checkout
+                <Button 
+                  className="w-full" 
+                  onClick={handleCheckout}
+                  disabled={checkoutMutation.isPending}
+                >
+                  {checkoutMutation.isPending ? "Processing..." : "Proceed to Checkout"}
                 </Button>
               </div>
             )}
