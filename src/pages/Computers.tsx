@@ -4,25 +4,31 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { useSession } from "@supabase/auth-helpers-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Computers = () => {
+  const session = useSession();
+  const queryClient = useQueryClient();
+
   const computers = [
     {
-      id: 1,
+      id: "comp-1",
       name: "MacBook Pro 16\"",
       price: 2499.99,
       image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
       description: "M3 Max chip, 32GB RAM, 1TB SSD"
     },
     {
-      id: 2,
+      id: "comp-2",
       name: "iPad Pro 12.9\"",
       price: 1099.99,
       image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
       description: "M2 chip, 256GB, Face ID, Apple Pencil support"
     },
     {
-      id: 3,
+      id: "comp-3",
       name: "Surface Laptop Studio",
       price: 1599.99,
       image: "https://images.unsplash.com/photo-1593642702749-b7d2a804fbcf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
@@ -30,8 +36,58 @@ const Computers = () => {
     }
   ];
 
-  const handleAddToCart = (computerName: string) => {
-    toast.success(`${computerName} added to cart`);
+  const addToCartMutation = useMutation({
+    mutationFn: async (productId: string) => {
+      if (!session?.user?.id) {
+        throw new Error("Must be logged in to add to cart");
+      }
+
+      // Check if item already exists in cart
+      const { data: existingItem } = await supabase
+        .from("user_cart")
+        .select("*")
+        .eq("user_id", session.user.id)
+        .eq("product_id", productId)
+        .single();
+
+      if (existingItem) {
+        // Update quantity if item exists
+        const { error } = await supabase
+          .from("user_cart")
+          .update({ quantity: existingItem.quantity + 1 })
+          .eq("id", existingItem.id);
+
+        if (error) throw error;
+      } else {
+        // Insert new item if it doesn't exist
+        const { error } = await supabase
+          .from("user_cart")
+          .insert({
+            user_id: session.user.id,
+            product_id: productId,
+            quantity: 1
+          });
+
+        if (error) throw error;
+      }
+    },
+    onSuccess: (_, productId) => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+      const product = computers.find(c => c.id === productId);
+      toast.success(`${product?.name} added to cart`);
+    },
+    onError: (error) => {
+      if (error.message === "Must be logged in to add to cart") {
+        toast.error("Please sign in to add items to cart");
+        document.getElementById("account-trigger")?.click();
+      } else {
+        toast.error("Failed to add item to cart");
+      }
+    }
+  });
+
+  const handleAddToCart = (productId: string) => {
+    addToCartMutation.mutate(productId);
   };
 
   return (
@@ -69,7 +125,8 @@ const Computers = () => {
                 <CardFooter>
                   <Button 
                     className="w-full"
-                    onClick={() => handleAddToCart(computer.name)}
+                    onClick={() => handleAddToCart(computer.id)}
+                    disabled={addToCartMutation.isPending}
                   >
                     <ShoppingCart className="mr-2 h-4 w-4" />
                     Add to Cart
